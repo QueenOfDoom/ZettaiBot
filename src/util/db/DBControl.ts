@@ -82,6 +82,10 @@ export async function getConfigFromGuild(identifier: string): Promise<Config> {
     return query!.config;
 }
 
+export async function isRegistered(identifier: string): Promise<boolean> {
+    return (await GuildModel.findOne({ identifier: identifier }).exec()) !== null;
+}
+
 export async function setGuildConfig(server: string, config: Config) {
     let query = await GuildModel.findOneAndUpdate(
         { identifier: server }, 
