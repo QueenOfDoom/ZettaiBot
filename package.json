@@ -1,0 +1,30 @@
+{
+  "name": "emotou",
+  "version": "1.0.1",
+  "description": "A kawaii bot with some cool features!",
+  "main": "app.js",
+  "scripts": {
+    "start:dev": "ts-node-dev -r tsconfig-paths/register --no-notify src/app.ts"
+  },
+  "keywords": [
+    "typescript"
+  ],
+  "author": "Douma",
+  "license": "MIT",
+  "dependencies": {
+    "@typegoose/typegoose": "^7.6.0",
+    "@types/mongoose": "^5.10.3",
+    "discord.js": "^12.5.1",
+    "dotenv": "^8.2.0",
+    "glob": "^7.1.6",
+    "mongoose": "^5.10.0"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.3",
+    "@types/node": "^14.14.34",
+    "ts-node": "^9.1.1",
+    "ts-node-dev": "^1.1.6",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^4.2.3"
+  }
+}
