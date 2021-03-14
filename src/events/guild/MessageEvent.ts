@@ -25,28 +25,37 @@ export const run: EventFunction = async(client: Bot, message: Message) => {
         let m: string = message.content; // I was just tired of typing this out...
         let match: number = 0;
         let response: string = "";
+        let counter = 0;
 
         while((match = m.search(regex)) !== -1) {
             response += m.substring(0,match); // Pre
             m = m.substring(match+1);
             match = m.indexOf(emoteTag[1]);
             let emote = await getEmoji(m.substring(0,match));
-            response += (emote.startsWith("<")) ? emote : m.substring(0,match);
+            
+            if(emote.startsWith("<")) {
+                response += emote;
+                counter++;
+            } else {
+                response += m.substring(0,match);
+            }
+
             m = m.substring(match+1);
         }
-        response += m;
         
-        let hook = await (<TextChannel> message.channel).createWebhook(message.member!.nickname || message.author.username, {
-                avatar: message.author.displayAvatarURL({
-                    format: 'png',
-                    dynamic: true,
-                    size: 512
-                })
-        });
-        await hook.send(response);
-        hook.delete();
-        message.delete();
-
+        if(counter > 0) {
+            response += m;
+            let hook = await (<TextChannel> message.channel).createWebhook(message.member!.nickname || message.author.username, {
+                    avatar: message.author.displayAvatarURL({
+                        format: 'png',
+                        dynamic: true,
+                        size: 512
+                    })
+            });
+            await hook.send(response);
+            hook.delete();
+            message.delete();
+        }
         return;
     }
 
